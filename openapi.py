@@ -1,7 +1,7 @@
 import openai
 import time
 
-openai.api_key = "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"
+openai.api_key = "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"
 
 def angel(prompt):
     completions = openai.Completion.create(
