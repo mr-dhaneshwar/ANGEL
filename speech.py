@@ -4,7 +4,6 @@ import datetime
 import pyttsx3
 # from GUI import*
 
-
 #Define All reply
 thanks = ['i am fine sir','always stands for you sir','i am good , thanks for asking sir','fine sir','i am good']
 bye =    ['goodbye angel','bye angel','bye','okay bye','okay bye angel','goodbye','chup ho jao','quit','quit Angel','wait','okay wait']
