@@ -2,6 +2,7 @@
 
 from operation import*
 from threading import*
+import pyautogui as p
 import socket
 import random
 
@@ -41,6 +42,7 @@ def main():
         try:
             while True:
                 query = takeCommand().lower()
+                # query = takeCommand()
                 if query in start:
                     p.hotkey('up')
                     if query == 'angel':
@@ -52,33 +54,50 @@ def main():
                 if 'goodbye' in query or 'bye' in query:
                     
                     # speak('goodbye sir, Love you 3000....',love_png)
-                    # f.destroy()
                     speak('goodbye sir, Love you 3000....')
+                    f.destroy()
                     return
         except Exception as e:
-            print(e)
+            print("error to start",e)
             
     else:
         msg = 'You are not connected to the internet'
         speak(msg) 
-
-main()
-
+        
 
 
 
-
-# def Exicute():
-#     t = Thread(target=main)
-#     t.start()
-#     new_frame()
+my_window(main)
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+# takeCommand()
 
 
 # t = Thread(target=my_window)
 # t.start()
+# start_button.configure(command=Exicute)
+# start_button.place(x=800,y=372)
 
 # start_button = Button(root, command=Exicute, text='Start', font=('Arial',12), relief=GROOVE,fg='Blue', borderwidth=10, height=2, width=5)
-# start_button.place(x=800,y=372)
+
 # my_window()
+
+# start_button.place(x=800,y=372)

@@ -1,9 +1,19 @@
-from requests import get
-import pyautogui as p
 from speech import*
 import webbrowser
 import random
+import pyautogui as p
+from requests import get
 from openapi import*
+
+def error(query):
+    '''
+    function that checks if the query is blank or not and returns either True or False.
+
+    '''
+    if query == '':     #checks if the query is blank or not
+        speak('I did not understand, please Say That again.... ', confused_png)
+        return True
+    return False
 
 def task():
     import pywhatkit as kit
@@ -95,8 +105,7 @@ def task():
         
         elif query_word[0] == 'angel':
             query = query.replace('angel ','')+'.'
-            # speak(angel(query), idea_png)
-            speak(angel(query))
+            speak(angel(query), idea_png)
 
         elif 'ip address' in query:
             ip = get('https://api.ipify.org').text

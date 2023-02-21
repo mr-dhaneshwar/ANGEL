@@ -26,7 +26,7 @@ def change_theme():
             output.configure(bg=c,fg='White', insertbackground='White')
             
         except Exception as e:
-            print(e)
+            print("error converting dark theme",e)
         theme = 'Dark'
     else:
         c = 'White'
@@ -47,9 +47,14 @@ def change_theme():
             
             
         except Exception as e:
-            print(e)
+            print("error converting dark theme",e)
         theme = 'Light'
 
+def change_leble(line,img):
+    global status,anime
+    img = PhotoImage(file=location+art_img[img])
+    status.configure(Text=line)
+    anime.configure(image=img)
 
 def off_speak():
     global speak_status
@@ -63,8 +68,7 @@ def off_speak():
 
 
 def write(text):
-
-    print(text+'\n')
+    # print(text+'\n')
     output.insert('end',text+'\n')
 
 def close():
@@ -74,11 +78,12 @@ def close():
 def clear():
     output.delete(1.0, END)
 
-
-def new_frame():
+location = 'D:\\Project\\Angel\\image\\'
+art_img = ["","smile.png","confused.png","gotit.png","idea.png","listening.png","love.png"]
+def new_frame(main):
 
     global f, f_label, scrollbar, output, broom_png, clr_button, close_button, close_png, smile_png, anime, t
-    global confused_png, gotit_png, idea_png, listening_png, love_png, status
+    global confused_png, gotit_png, idea_png, listening_png, love_png, status,location,art_img
 
     if theme == "Dark":
         c='Black'
@@ -91,19 +96,19 @@ def new_frame():
     f = Frame(root, width=1100, height=700,bg=c,relief=GROOVE,borderwidth=8)
     f.place(x=100,y=0)
 
-    broom_png = PhotoImage(file="D:\\Project\\Angel\\image\\icons8-broom-40.png")
+    broom_png = PhotoImage(file="D:\\Project\\Angel saperate module with gui\\image\\clean.png")
     clr_button = Button(f,image=broom_png , relief=GROOVE, bg=c, command=clear)
     clr_button.place(x=250,y=8)
 
     status = Label(f, text='connecting....',bg=c,fg='Red',font=('Arial',12))
     status.place(x=70,y=400)
 
-    smile_png = PhotoImage(file= "D:\\Project\\Angel\\image\\smile.png")
-    confused_png = PhotoImage(file= "D:\\Project\\Angel\\image\\confused.png")
-    gotit_png = PhotoImage(file= "D:\\Project\\Angel\\image\\gotit.png")
-    idea_png = PhotoImage(file= "D:\\Project\\Angel\\image\\idea.png")
-    listening_png = PhotoImage(file= "D:\\Project\\Angel\\image\\listening.png")
-    love_png = PhotoImage(file= "D:\\Project\\Angel\\image\\love.png")
+    smile_png = PhotoImage(file= location+art_img[1])
+    confused_png = PhotoImage(file= location+art_img[2])
+    gotit_png = PhotoImage(file= location+art_img[3])
+    idea_png = PhotoImage(file= location+art_img[4])
+    listening_png = PhotoImage(file= location+art_img[5])
+    love_png = PhotoImage(file= location+art_img[6])
 
     anime = Label(f, image=smile_png, height=220, width=220, bg=c)
     anime.place(x=10,y=460)
@@ -113,10 +118,10 @@ def new_frame():
     f_label.place(x=305,y=5)
     
     # from Angel import main
-    # t = Thread(target=main)
-    # t.start()
+    t = Thread(target=main)
+    t.start()
 
-    close_png = PhotoImage(file="D:\\Project\\Angel\\image\\icons8-cancel-40.png")
+    close_png = PhotoImage(file="D:\\Project\\Angel saperate module with gui\\image\\close.png")
     close_button = Button(f,image=close_png , relief=GROOVE, bg=c, command=close)
     close_button.place(x=1010,y=8)
 
@@ -131,7 +136,7 @@ def new_frame():
 speak_status = 1
 # root  = Tk()
 # start_button = Button(root, text='Start', font=('Arial',12), relief=GROOVE,fg='Blue', borderwidth=10, height=2, width=5)
-def my_window():
+def my_window(main):
     
 
     global bglb, theme_check, name_lb, silence_png, silent_button, start_button, speak_status, sound_png, root
@@ -151,7 +156,7 @@ def my_window():
     #     if face_match():    #recognize face
     #         speak('welcome sir')
 
-    photo = PhotoImage(file="D:\\Project\\Angel\\image\\IMG_20230102_154113.png")
+    photo = PhotoImage(file="D:\\Project\\Angel saperate module with gui\\image\\background.png")
     bglb = Label(root,image=photo)
     bglb.place(relwidth=1,relheight=1)
 
@@ -167,7 +172,7 @@ def my_window():
     name_lb = Label(root, text='A\nN\nG\nE\nL', font=('Arial',40), fg='Blue')
     name_lb.pack(anchor=W,padx=30,pady=10)
 
-    start_button = Button(root, text='Start', font=('Arial',12), relief=GROOVE,fg='Blue', borderwidth=10, height=2, width=5, command=new_frame)
+    start_button = Button(root, text='Start', font=('Arial',12), relief=GROOVE,fg='Blue', borderwidth=10, height=2, width=5, command=lambda:new_frame(main))
     # start_button = Button(root,command=None, text='Start', font=('Arial',12), relief=GROOVE,fg='Blue', borderwidth=10, height=2, width=5)
     start_button.place(x=800,y=372)
     root.mainloop()

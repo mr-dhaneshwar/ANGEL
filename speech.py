@@ -1,8 +1,8 @@
 import speech_recognition as sr
-from threading import*
-import datetime
 import pyttsx3
-# from GUI import*
+import datetime
+from GUI import*
+from threading import*
 
 #Define All reply
 thanks = ['i am fine sir','always stands for you sir','i am good , thanks for asking sir','fine sir','i am good']
@@ -30,49 +30,41 @@ def current_time():
         return(f"it's {strTime}PM")
 
 
-def error(query):
-    '''
-    function that checks if the query is blank or not and returns either True or False.
 
-    '''
-    if query == '':     #checks if the query is blank or not
-        # speak('I did not understand, please Say That again.... ', confused_png)
-        speak('I did not understand, please Say That again.... ')
-        return True
-    return False
 
-# def speak(audio,img=None):
-def speak(audio):
+def speak(audio,img=None):
     '''
     function that takes an audio string and plays it back using the pyttsx3 module.
     '''
-    # global speak_status
+    global speak_status,theme
     try:
         # if img==None:
         #     img=gotit_png
         # anime.configure(image=img)
-        # t = Thread(target=write,args=('Angel: '+audio,))
-        # t.start()
-
+        t = Thread(target=write,args=('Angel: '+audio,))
+        t.start()
+        print('Angel: '+audio)
         # if speak_status == 1:
         #     engine.say(audio)
         #     engine.runAndWait()
-        print(f'Angel: {audio}')
         engine.say(audio)
         engine.runAndWait()
     except Exception as e:
-        print('Somthing went wrong....\n',e)
+        print('speak problem....\n',e)
 
 def takeCommand():
     '''
     function that listens to the microphone and recognizes the speech using Google Speech Recognition.
 
     '''
-    
+
     r = sr.Recognizer()     #creates an instance of the SpeechRecognizer class from the SpeechRecognition library
     try:
         with sr.Microphone() as source:
             print('Listning....')
+            # t = Thread(target=change_leble('Listning....',1))
+            # t.start()
+            change_leble('Listning....',1)
             # status.configure(text='Listning....')
             # anime.configure(image=smile_png)
             r.phrase_threshold = 1
@@ -82,8 +74,9 @@ def takeCommand():
             print('Recognizing....')
             # status.configure(text='Recognizing....')
             # anime.configure(image=listening_png)
+            # change_leble('Recognizing....',5)
             query = r.recognize_google(audio, language='en-in')
-            # write(f'you: {query}')
+            write(f'you: {query}')
             print(f'you: {query}')
 
         except Exception as e:
@@ -91,5 +84,6 @@ def takeCommand():
             return query
         return query
     except Exception as e:
-        print('somthing went wrong....',e)
+        # print('somthing went wrong....',e)
+        print('listen problem......',e)
 
