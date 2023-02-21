@@ -96,7 +96,7 @@ def new_frame(main):
     f = Frame(root, width=1100, height=700,bg=c,relief=GROOVE,borderwidth=8)
     f.place(x=100,y=0)
 
-    broom_png = PhotoImage(file="D:\\Project\\Angel saperate module with gui\\image\\clean.png")
+    broom_png = PhotoImage(file="D:\\Project\\Angel\\image\\clean.png")
     clr_button = Button(f,image=broom_png , relief=GROOVE, bg=c, command=clear)
     clr_button.place(x=250,y=8)
 
@@ -121,9 +121,10 @@ def new_frame(main):
     t = Thread(target=main)
     t.start()
 
-    close_png = PhotoImage(file="D:\\Project\\Angel saperate module with gui\\image\\close.png")
+    close_png = PhotoImage(file="D:\\Project\\Angel\\image\\close.png")
     close_button = Button(f,image=close_png , relief=GROOVE, bg=c, command=close)
     close_button.place(x=1010,y=8)
+    
 
     scrollbar = Scrollbar(f, orient=VERTICAL)
     scrollbar.place(x=1065,relheight=1)
@@ -156,7 +157,7 @@ def my_window(main):
     #     if face_match():    #recognize face
     #         speak('welcome sir')
 
-    photo = PhotoImage(file="D:\\Project\\Angel saperate module with gui\\image\\background.png")
+    photo = PhotoImage(file="D:\\Project\\Angel\\image\\background.png")
     bglb = Label(root,image=photo)
     bglb.place(relwidth=1,relheight=1)
 

@@ -62,9 +62,11 @@ def takeCommand():
     try:
         with sr.Microphone() as source:
             print('Listning....')
+            t = Thread(target=write,args=('Angel: Listning....',))
+            t.start()
             # t = Thread(target=change_leble('Listning....',1))
             # t.start()
-            change_leble('Listning....',1)
+            # change_leble('Listning....',1)
             # status.configure(text='Listning....')
             # anime.configure(image=smile_png)
             r.phrase_threshold = 1
@@ -72,6 +74,8 @@ def takeCommand():
             audio = r.listen(source)
         try:
             print('Recognizing....')
+            t = Thread(target=write,args=('Angel: Recognizing....',))
+            t.start()
             # status.configure(text='Recognizing....')
             # anime.configure(image=listening_png)
             # change_leble('Recognizing....',5)
