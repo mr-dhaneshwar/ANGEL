@@ -62,7 +62,7 @@ def main():
             
     else:
         msg = 'You are not connected to the internet'
-        change_leble('connection error....',2)
+        change_leble('connection error....','D:\\Project\\Angel\\image\\confused.png')
         speak(msg) 
         
 

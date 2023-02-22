@@ -16,7 +16,7 @@ def change_theme():
         silent_button.configure(bg=c)
         start_button.configure(bg=c)
         try:
-            f.configure(bg=c)
+            my_frame.configure(bg=c)
             clr_button.configure(bg=c)
             f_label.configure(bg=c)
             close_button.configure(bg=c)
@@ -36,7 +36,7 @@ def change_theme():
         name_lb.configure(bg=c)
         start_button.configure(bg=c,fg='Blue')
         try:
-            f.configure(bg=c)
+            my_frame.configure(bg=c)
             clr_button.configure(bg=c)
             f_label.configure(bg=c)
             close_button.configure(bg=c)
@@ -75,8 +75,8 @@ def clear():
     output.delete(1.0, END)
 
 def change_leble(line,no):
-    global status,anime,f
-    img = PhotoImage(file=location+art_img[no])
+    global status,anime,my_frame,art_img
+    img = PhotoImage(file='D:\\Project\\Angel\\image\\confused.png')
     status.configure(text=line)
     anime.configure(image=img)
 
