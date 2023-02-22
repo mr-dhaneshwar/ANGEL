@@ -3,6 +3,7 @@ import time
 
 openai.api_key = "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"
 
+
 def angel(prompt):
     completions = openai.Completion.create(
         engine="text-davinci-002",

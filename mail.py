@@ -1,5 +1,6 @@
 import smtplib
 
+
 def sendEmail(to, content):
     server = smtplib.SMTP('smtp.gmail.com', 587)
     server.ehlo()
@@ -8,11 +9,12 @@ def sendEmail(to, content):
     server.sendmail('prasaddhaneshwar09@gmail.com', to, content)
     server.close()
 
+
 try:
     msg = input('Enter MSG:- ')
     to = 'mahajanghanshyam65@gmail.com'
-    sendEmail(to,msg)
-    print('MSG has been send to',to)
+    sendEmail(to, msg)
+    print('MSG has been send to', to)
 
 except Exception as e:
     print(e)
