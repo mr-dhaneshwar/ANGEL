@@ -32,23 +32,21 @@ def current_time():
 
 
 
-def speak(audio,img=None):
+def speak(audio,img=1):
     '''
     function that takes an audio string and plays it back using the pyttsx3 module.
     '''
     global speak_status,theme
     try:
-        # if img==None:
-        #     img=gotit_png
-        # anime.configure(image=img)
+        change_leble('',img)
         t = Thread(target=write,args=('Angel: '+audio,))
         t.start()
+
         print('Angel: '+audio)
-        # if speak_status == 1:
-        #     engine.say(audio)
-        #     engine.runAndWait()
-        engine.say(audio)
-        engine.runAndWait()
+        if speak_check():
+            engine.say(audio)
+            engine.runAndWait()
+
     except Exception as e:
         print('speak problem....\n',e)
 
@@ -62,22 +60,12 @@ def takeCommand():
     try:
         with sr.Microphone() as source:
             print('Listning....')
-            # t = Thread(target=write,args=('Angel: Listning....',))
-            # t.start()
-            # t = Thread(target=change_leble('Listning....',1))
-            # t.start()
             change_leble('Listning....',1)
-            # status.configure(text='Listning....')
-            # anime.configure(image=smile_png)
             r.phrase_threshold = 1
             r.energy_threshold = 600
             audio = r.listen(source)
         try:
             print('Recognizing....')
-            # t = Thread(target=write,args=('Angel: Recognizing....',))
-            # t.start()
-            # status.configure(text='Recognizing....')
-            # anime.configure(image=listening_png)
             change_leble('Recognizing....',5)
             query = r.recognize_google(audio, language='en-in')
             write(f'you: {query}')
@@ -88,6 +76,5 @@ def takeCommand():
             return query
         return query
     except Exception as e:
-        # print('somthing went wrong....',e)
         print('listen problem......',e)
 

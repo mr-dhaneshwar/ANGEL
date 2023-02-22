@@ -105,7 +105,7 @@ def task():
         
         elif query_word[0] == 'angel':
             query = query.replace('angel ','')+'.'
-            speak(angel(query), idea_png)
+            speak(angel(query), 4)
 
         elif 'ip address' in query:
             ip = get('https://api.ipify.org').text

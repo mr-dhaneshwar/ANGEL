@@ -58,11 +58,17 @@ def off_speak():
     if speak_status == 1:
         speak_status =  0
         silent_button.configure(image=sound_png)
+        return False
     else:
         speak_status =  1
         silent_button.configure(image=silence_png)
+        return True
 
-
+def speak_check():
+    if speak_status==1:
+        return True
+    else:
+        return False
 def write(text):
     # print(text+'\n')
     output.insert('end',text+'\n')
@@ -73,15 +79,15 @@ def close():
     
 def clear():
     output.delete(1.0, END)
+    
 
 def change_leble(line,no):
     global status,anime,my_frame,art_img
-    img = PhotoImage(file='D:\\Project\\Angel\\image\\confused.png')
     status.configure(text=line)
-    anime.configure(image=img)
+    anime.configure(image=art_img[no])
 
 location = 'D:\\Project\\Angel\\image\\'
-art_img = ["","smile.png","confused.png","gotit.png","idea.png","listening.png","love.png"]
+
 def new_frame(main):
 
     global my_frame, f_label, scrollbar, output, broom_png, clr_button, close_button, close_png, smile_png, anime, t
@@ -98,19 +104,20 @@ def new_frame(main):
     my_frame = Frame(root, width=1100, height=700,bg=c,relief=GROOVE,borderwidth=8)
     my_frame.place(x=100,y=0)
 
-    broom_png = PhotoImage(file="D:\\Project\\Angel\\image\\clean.png")
+    broom_png = PhotoImage(file=location+"clean.png")
     clr_button = Button(my_frame,image=broom_png , relief=GROOVE, bg=c, command=clear)
     clr_button.place(x=250,y=8)
 
     status = Label(my_frame, text='connecting....',bg=c,fg='Red',font=('Arial',12))
     status.place(x=70,y=400)
-
-    smile_png = PhotoImage(file= location+art_img[1])
-    confused_png = PhotoImage(file= location+art_img[2])
-    gotit_png = PhotoImage(file= location+art_img[3])
-    idea_png = PhotoImage(file= location+art_img[4])
-    listening_png = PhotoImage(file= location+art_img[5])
-    love_png = PhotoImage(file= location+art_img[6])
+    
+    smile_png = PhotoImage(file= location+"smile.png")
+    confused_png = PhotoImage(file= location+"confused.png")
+    gotit_png = PhotoImage(file= location+"gotit.png")
+    idea_png = PhotoImage(file= location+"idea.png")
+    listening_png = PhotoImage(file= location+"listening.png")
+    love_png = PhotoImage(file= location+"love.png")
+    art_img = ["", smile_png, confused_png, gotit_png, idea_png, listening_png, love_png]
 
     anime = Label(my_frame, image=smile_png, height=220, width=220, bg=c)
     anime.place(x=10,y=460)
@@ -119,11 +126,10 @@ def new_frame(main):
     f_label = Label(my_frame,relief=GROOVE,height=2, width=63,borderwidth=2,text='Automated Network Generating Expert Logic  ( ANGEL )',bg=c,fg='Red',font=('Arial',12))
     f_label.place(x=305,y=5)
     
-    # from Angel import main
     t = Thread(target=main)
     t.start()
 
-    close_png = PhotoImage(file="D:\\Project\\Angel\\image\\close.png")
+    close_png = PhotoImage(file=location+"close.png")
     close_button = Button(my_frame,image=close_png , relief=GROOVE, bg=c, command=close)
     close_button.place(x=1010,y=8)
     
@@ -137,8 +143,6 @@ def new_frame(main):
     output.config(yscrollcommand=scrollbar.set)
 
 speak_status = 1
-# root  = Tk()
-# start_button = Button(root, text='Start', font=('Arial',12), relief=GROOVE,fg='Blue', borderwidth=10, height=2, width=5)
 def my_window(main):
     
 
@@ -159,7 +163,7 @@ def my_window(main):
     #     if face_match():    #recognize face
     #         speak('welcome sir')
 
-    photo = PhotoImage(file="D:\\Project\\Angel\\image\\background.png")
+    photo = PhotoImage(file=location+"background.png")
     bglb = Label(root,image=photo)
     bglb.place(relwidth=1,relheight=1)
 
@@ -167,8 +171,8 @@ def my_window(main):
     theme_check.pack(anchor=W, padx=5, pady=10)
 
     
-    silence_png = PhotoImage(file="D:\\Project\\Angel\\image\\silence.png")
-    sound_png = PhotoImage(file="D:\\Project\\Angel\\image\\sound.png")
+    silence_png = PhotoImage(file=location+"silence.png")
+    sound_png = PhotoImage(file=location+"sound.png")
     silent_button = Button(root, image=silence_png, relief=GROOVE, borderwidth=2, command=off_speak)
     silent_button.pack(anchor=W,padx=40)
 
@@ -176,6 +180,5 @@ def my_window(main):
     name_lb.pack(anchor=W,padx=30,pady=10)
 
     start_button = Button(root, text='Start', font=('Arial',12), relief=GROOVE,fg='Blue', borderwidth=10, height=2, width=5, command=lambda:new_frame(main))
-    # start_button = Button(root,command=None, text='Start', font=('Arial',12), relief=GROOVE,fg='Blue', borderwidth=10, height=2, width=5)
     start_button.place(x=800,y=372)
     root.mainloop()
