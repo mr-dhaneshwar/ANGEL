@@ -66,7 +66,7 @@ def takeCommand():
             t.start()
             # t = Thread(target=change_leble('Listning....',1))
             # t.start()
-            # change_leble('Listning....',1)
+            change_leble('Listning....',1)
             # status.configure(text='Listning....')
             # anime.configure(image=smile_png)
             r.phrase_threshold = 1
@@ -78,7 +78,7 @@ def takeCommand():
             t.start()
             # status.configure(text='Recognizing....')
             # anime.configure(image=listening_png)
-            # change_leble('Recognizing....',5)
+            change_leble('Recognizing....',5)
             query = r.recognize_google(audio, language='en-in')
             write(f'you: {query}')
             print(f'you: {query}')

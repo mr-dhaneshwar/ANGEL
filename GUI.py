@@ -50,11 +50,7 @@ def change_theme():
             print("error converting dark theme",e)
         theme = 'Light'
 
-def change_leble(line,img):
-    global status,anime
-    img = PhotoImage(file=location+art_img[img])
-    status.configure(Text=line)
-    anime.configure(image=img)
+
 
 def off_speak():
     global speak_status
@@ -72,17 +68,23 @@ def write(text):
     output.insert('end',text+'\n')
 
 def close():
-    f.destroy()
+    my_frame.destroy()
 
     
 def clear():
     output.delete(1.0, END)
 
+def change_leble(line,no):
+    global status,anime,f
+    img = PhotoImage(file=location+art_img[no])
+    status.configure(text=line)
+    anime.configure(image=img)
+
 location = 'D:\\Project\\Angel\\image\\'
 art_img = ["","smile.png","confused.png","gotit.png","idea.png","listening.png","love.png"]
 def new_frame(main):
 
-    global f, f_label, scrollbar, output, broom_png, clr_button, close_button, close_png, smile_png, anime, t
+    global my_frame, f_label, scrollbar, output, broom_png, clr_button, close_button, close_png, smile_png, anime, t
     global confused_png, gotit_png, idea_png, listening_png, love_png, status,location,art_img
 
     if theme == "Dark":
@@ -93,14 +95,14 @@ def new_frame(main):
         fc = 'Black'
 
     
-    f = Frame(root, width=1100, height=700,bg=c,relief=GROOVE,borderwidth=8)
-    f.place(x=100,y=0)
+    my_frame = Frame(root, width=1100, height=700,bg=c,relief=GROOVE,borderwidth=8)
+    my_frame.place(x=100,y=0)
 
     broom_png = PhotoImage(file="D:\\Project\\Angel\\image\\clean.png")
-    clr_button = Button(f,image=broom_png , relief=GROOVE, bg=c, command=clear)
+    clr_button = Button(my_frame,image=broom_png , relief=GROOVE, bg=c, command=clear)
     clr_button.place(x=250,y=8)
 
-    status = Label(f, text='connecting....',bg=c,fg='Red',font=('Arial',12))
+    status = Label(my_frame, text='connecting....',bg=c,fg='Red',font=('Arial',12))
     status.place(x=70,y=400)
 
     smile_png = PhotoImage(file= location+art_img[1])
@@ -110,11 +112,11 @@ def new_frame(main):
     listening_png = PhotoImage(file= location+art_img[5])
     love_png = PhotoImage(file= location+art_img[6])
 
-    anime = Label(f, image=smile_png, height=220, width=220, bg=c)
+    anime = Label(my_frame, image=smile_png, height=220, width=220, bg=c)
     anime.place(x=10,y=460)
 
 
-    f_label = Label(f,relief=GROOVE,height=2, width=63,borderwidth=2,text='Automated Network Generating Expert Logic  ( ANGEL )',bg=c,fg='Red',font=('Arial',12))
+    f_label = Label(my_frame,relief=GROOVE,height=2, width=63,borderwidth=2,text='Automated Network Generating Expert Logic  ( ANGEL )',bg=c,fg='Red',font=('Arial',12))
     f_label.place(x=305,y=5)
     
     # from Angel import main
@@ -122,14 +124,14 @@ def new_frame(main):
     t.start()
 
     close_png = PhotoImage(file="D:\\Project\\Angel\\image\\close.png")
-    close_button = Button(f,image=close_png , relief=GROOVE, bg=c, command=close)
+    close_button = Button(my_frame,image=close_png , relief=GROOVE, bg=c, command=close)
     close_button.place(x=1010,y=8)
     
 
-    scrollbar = Scrollbar(f, orient=VERTICAL)
+    scrollbar = Scrollbar(my_frame, orient=VERTICAL)
     scrollbar.place(x=1065,relheight=1)
     
-    output = Text(f, bg=c,fg=fc, insertbackground=fc,height=24, width=80,relief=GROOVE,borderwidth=2, yscrollcommand=scrollbar.set, font=('Segoe UI',11))
+    output = Text(my_frame, bg=c,fg=fc, insertbackground=fc,height=24, width=80,relief=GROOVE,borderwidth=2, yscrollcommand=scrollbar.set, font=('Segoe UI',11))
     output.place(x=250,y=65)
     scrollbar.config(command=output.yview)
     output.config(yscrollcommand=scrollbar.set)

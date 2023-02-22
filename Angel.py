@@ -55,13 +55,14 @@ def main():
                     
                     # speak('goodbye sir, Love you 3000....',love_png)
                     speak('goodbye sir, Love you 3000....')
-                    f.destroy()
+                    close()
                     return
         except Exception as e:
             print("error to start",e)
             
     else:
         msg = 'You are not connected to the internet'
+        change_leble('connection error....',2)
         speak(msg) 
         
 
