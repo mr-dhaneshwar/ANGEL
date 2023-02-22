@@ -164,7 +164,7 @@ def my_window(main):
     #     face_train()    #train face model
     # else:
     #     if face_match():    #recognize face
-    #         speak('welcome sir')
+    #         print('welcome sir...')
 
     photo = PhotoImage(file=location + "background.png")
     bglb = Label(root, image=photo)
