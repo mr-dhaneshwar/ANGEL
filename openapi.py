@@ -1,7 +1,7 @@
 import openai
 import time
 
-openai.api_key = "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"
+openai.api_key = ""
 
 
 def angel(prompt):
