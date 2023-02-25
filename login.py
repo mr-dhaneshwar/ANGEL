@@ -30,7 +30,7 @@ if createTable():
                 print('user already exist')
             else:
                 query = '''insert into ANGEL values(%s,%s)'''
-                info = (input('enter username: '),input('enter password: '))
+                info = (info, input('enter password: '))
                 cursor.execute(query,info)
                 con.commit()
                 print('Account created succesfully')
@@ -53,6 +53,6 @@ if createTable():
         except pymysql.Error as e:
             print(e,'singin')
     singup()
-    singin()
+    # singin()
     cursor.close()
     con.close()

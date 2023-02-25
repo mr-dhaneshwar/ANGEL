@@ -10,11 +10,11 @@ def sendEmail(to, content):
     server.close()
 
 
-try:
-    msg = input('Enter MSG:- ')
-    to = 'mahajanghanshyam65@gmail.com'
-    sendEmail(to, msg)
-    print('MSG has been send to', to)
+# try:
+#     msg = input('Enter MSG:- ')
+#     to = 'mahajanghanshyam65@gmail.com'
+#     sendEmail(to, msg)
+#     print('MSG has been send to', to)
 
-except Exception as e:
-    print(e)
+# except Exception as e:
+#     print(e)

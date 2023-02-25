@@ -1,9 +1,10 @@
+from requests import get
+import pyautogui as p
+from openapi import *
 from speech import *
 import webbrowser
+from mail import*
 import random
-import pyautogui as p
-from requests import get
-from openapi import *
 
 
 def error(query):
@@ -112,6 +113,19 @@ def task():
         elif 'ip address' in query:
             ip = get('https://api.ipify.org').text
             speak(f'your IP Address is {ip}')
+
+        elif 'email' in query or 'mail'  in query:
+            try:
+                speak('to whom you want to send')
+                to = takeCommand().lower()
+                speak('what is the message')
+                msg = takeCommand().lower()
+                sendEmail(to, msg)
+                speak('message has been send to', to)
+
+            except Exception as e:
+                print('problem while sending email',e)
+                speak('email not send try again...')
 
         else:
             speak('sorry.. this is not in my system')
