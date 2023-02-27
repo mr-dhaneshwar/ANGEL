@@ -5,7 +5,7 @@ openai.api_key = ""
 
 def angel(prompt):
     completions = openai.Completion.create(
-        engine="text-davinci-002",
+        engine="text-davinci-003",
         prompt=prompt,
         max_tokens=1024,
         n=1,
@@ -16,3 +16,8 @@ def angel(prompt):
     message = completions.choices[0].text
     time.sleep(1)
     return message
+
+# while True:
+#     x = input('enter prompt: ')
+#     y = angel(x)
+#     print(y)

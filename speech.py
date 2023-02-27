@@ -60,7 +60,7 @@ def takeCommand():
             print('Listning....')
             change_leble('Listning....', 1)
             r.phrase_threshold = 1
-            r.energy_threshold = 600
+            r.energy_threshold = 4000
             audio = r.listen(source)
         try:
             print('Recognizing....')

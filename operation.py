@@ -13,7 +13,7 @@ def error(query):
 
     '''
     if query == '':  # checks if the query is blank or not
-        speak('I did not understand, please Say That again.... ', confused_png)
+        speak('I did not understand, please Say That again.... ', 2)
         return True
     return False
 
@@ -106,6 +106,27 @@ def task():
             kit.playonyt(song)
             break
 
+        elif 'email' in query or 'mail'  in query:
+            try:
+                # speak('to whom you want to send')
+                # to = takeCommand().lower()
+
+                to_list = (query.split('to'))
+                to = to_list[1].strip()
+
+                if check_mail(to):
+                    to = check_mail(to)
+                    speak('what is the message')
+                    msg = takeCommand().lower()
+                    sendEmail(to, msg)
+                    speak('message has been send to', to)
+                else:
+                    speak('email address not found',2)
+
+            except Exception as e:
+                print('problem while sending email',e)
+                speak('email not send try again...',2)
+
         elif query_word[0] == 'angel':
             query = query.replace('angel ', '') + '.'
             speak(angel(query), 4)
@@ -114,18 +135,6 @@ def task():
             ip = get('https://api.ipify.org').text
             speak(f'your IP Address is {ip}')
 
-        elif 'email' in query or 'mail'  in query:
-            try:
-                speak('to whom you want to send')
-                to = takeCommand().lower()
-                speak('what is the message')
-                msg = takeCommand().lower()
-                sendEmail(to, msg)
-                speak('message has been send to', to)
-
-            except Exception as e:
-                print('problem while sending email',e)
-                speak('email not send try again...')
 
         else:
             speak('sorry.. this is not in my system')
