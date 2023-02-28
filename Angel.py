@@ -7,7 +7,6 @@ import socket
 import random
 
 
-
 def internet_connection_status():
     try:
         socket.create_connection(("www.google.com", 80))

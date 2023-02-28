@@ -1,12 +1,13 @@
 import smtplib
 
-mail_list = ['ghanshyam-mahajanghanshyam65@gmail.com', 'me-prasaddhaneshwar22@gmail.com']
+mail_list = ['ghanshyam-mahajanghanshyam65@gmail.com', 'me-prasaddhaneshwar22@gmail.com', 
+             'kunal-ktmahajan2001@gmail.com', 'mahesh-www.mrsananse@gmail.com']
 
 def check_mail(e):
     for i in mail_list:
         x = i.split('-')
         if e in x:
-            return x[1]
+            return x
         else:
             continue
 
@@ -14,9 +15,12 @@ def sendEmail(to, content):
     server = smtplib.SMTP('smtp.gmail.com', 587)
     server.ehlo()
     server.starttls()
-    server.login('prasaddhaneshwar09@gmail.com', 'madhuzybdejhozff')
+    server.login('prasaddhaneshwar09@gmail.com', 'nzvcnfljjylvaghv')
     server.sendmail('prasaddhaneshwar09@gmail.com', to, content)
     server.close()
+
+
+
 
 
 
@@ -32,9 +36,9 @@ def sendEmail(to, content):
 
 # try:
 #     msg = input('Enter MSG:- ')
-#     to = 'prasaddhaneshwar22@gmail.com'
+#     to = 'mahajanghanshyam65@gmail.com'
 #     sendEmail(to, msg)
 #     print('MSG has been send to', to)
 
 # except Exception as e:
-#     print('email not send',e)
+#     print(e)

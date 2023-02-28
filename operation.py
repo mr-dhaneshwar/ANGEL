@@ -82,19 +82,6 @@ def task():
             p.hotkey('Win', 'Alt', 'writeScreen')
             speak('screenshot seved')
 
-        elif 'sleep' in query:
-            speak('ok sir')
-            p.hotkey('Win', 'd')
-            p.hotkey('Alt', 'F4')
-            p.hotkey('up')
-            p.hotkey('Enter')
-            return
-
-        elif 'shutdown' in query or 'off' in query:
-            p.hotkey('win', 'd')
-            p.hotkey('Alt', 'F4')
-            speak('Shutting down')
-            p.hotkey('Enter')
 
         elif 'time' in query:
             speak(current_time() + ' sir')
@@ -108,9 +95,6 @@ def task():
 
         elif 'email' in query or 'mail'  in query:
             try:
-                # speak('to whom you want to send')
-                # to = takeCommand().lower()
-
                 to_list = (query.split('to'))
                 to = to_list[1].strip()
 
@@ -118,14 +102,28 @@ def task():
                     to = check_mail(to)
                     speak('what is the message')
                     msg = takeCommand().lower()
-                    sendEmail(to, msg)
-                    speak('message has been send to', to)
+                    sendEmail(to[1], msg)       #1st index gives email
+                    speak(f'message has been send to {to[0]}', 1)   #0 index gives name
                 else:
                     speak('email address not found',2)
 
             except Exception as e:
                 print('problem while sending email',e)
                 speak('email not send try again...',2)
+
+        elif 'sleep' in query:
+            speak('ok sir')
+            p.hotkey('Win', 'd')
+            p.hotkey('Alt', 'F4')
+            p.hotkey('up')
+            p.hotkey('Enter')
+            return
+
+        elif 'shutdown' in query :
+            p.hotkey('win', 'd')
+            p.hotkey('Alt', 'F4')
+            speak('Shutting down')
+            p.hotkey('Enter')
 
         elif query_word[0] == 'angel':
             query = query.replace('angel ', '') + '.'
@@ -136,5 +134,6 @@ def task():
             speak(f'your IP Address is {ip}')
 
 
+            
         else:
             speak('sorry.. this is not in my system')
