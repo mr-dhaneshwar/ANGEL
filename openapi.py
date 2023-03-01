@@ -10,14 +10,9 @@ def angel(prompt):
         max_tokens=1024,
         n=1,
         stop=None,
-        temperature=0.5,
+        temperature=1,
     )
 
     message = completions.choices[0].text
-    time.sleep(1)
+    # time.sleep(1)
     return message
-
-# while True:
-#     x = input('enter prompt: ')
-#     y = angel(x)
-#     print(y)
