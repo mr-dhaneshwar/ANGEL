@@ -64,6 +64,5 @@ def main():
         msg = 'You are not connected to the internet'
         speak(msg, 2)
 
-
 my_window(main)     #starting main loop
 

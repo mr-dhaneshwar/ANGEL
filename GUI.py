@@ -89,7 +89,7 @@ def change_leble(line, no):
     anime.configure(image=art_img[no])
 
 
-location = 'D:\\Project\\Angel\\image\\'
+location = 'image\\'
 
 
 def new_frame(main):
@@ -155,16 +155,18 @@ def my_window(main):
     root.minsize(1200, 700)
     root.maxsize(1200, 700)
     root.title('ANGEL_2.0')
-    # root.wm_iconbitmap("D:\\Project\\Angel\\image\\Angel icon.png")
+    logo = PhotoImage(file="image\\logo.png")
+    root.iconphoto(False, logo)
 
     # implementing face lock system
-    # if not os.listdir('samples'):
-    #     print('no face samples')
-    #     face_sample()   #take face samples
-    #     face_train()    #train face model
-    # else:
-    #     if face_match():    #recognize face
-    #         print('welcome sir...')
+    
+    if not os.listdir('samples'):
+        print('no face samples')
+        face_sample()   #take face samples
+        face_train()    #train face model
+    else:
+        if face_match():    #recognize face
+            print('welcome sir...')
 
     photo = PhotoImage(file=location + "background.png")
     bglb = Label(root, image=photo)
