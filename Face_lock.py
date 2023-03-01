@@ -3,9 +3,8 @@ import numpy as np
 from PIL import Image  # pillow package
 import os
 
-xmlpath = "C:\\Users\\prasa\\AppData\\Roaming\\Python\\Python310\\site-packages\\cv2\\data" \
+xmlpath = "C:\\Users\\prasa\\AppData\\Roaming\\Python\\Python311\\site-packages\\cv2\\data" \
           "\\haarcascade_frontalface_default.xml"
-
 
 def face_sample():  # This function for Generating a sample images
     global xmlpath
@@ -30,6 +29,7 @@ def face_sample():  # This function for Generating a sample images
         converted_image = cv2.cvtColor(img,
         cv2.COLOR_BGR2GRAY)  # The function converts an input image from one color space to another
         faces = detector.detectMultiScale(converted_image, 1.3, 5)
+        
 
         for (x, y, w, h) in faces:
             cv2.rectangle(img, (x, y), (x + w, y + h), (255, 0, 0), 2)  # used to draw a rectangle on any image
