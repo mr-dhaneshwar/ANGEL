@@ -7,7 +7,7 @@ import socket
 import random
 
 
-def internet_connection_status():
+def internet_connection_status():       #check the internet connection
     try:
         socket.create_connection(("www.google.com", 80))
         return True  # "You are connected to the internet"
@@ -15,7 +15,7 @@ def internet_connection_status():
         return False  # "You are not connected to the internet"
 
 
-def wishMe():
+def wishMe():   #for greet
     '''
     function that says a greeting according to the current time.
 
@@ -42,21 +42,20 @@ def main():
     if internet_connection_status():
 
         try:
-            while True:
-                query = takeCommand().lower()
-                # query = takeCommand()
-                if query in start:
+            while True:     #for continue listening untill thye find wakeup key word 
+                query = takeCommand().lower()       
+                
+                if query in start:  #
                     p.hotkey('up')
-                    if query == 'angel':
+                    if query == 'angel':    #if wake word is Angel then continue directly
                         speak(random.choice(angel_output))
-                        task()
+                        task()              #to perform various operation (tasks)
                     else:
-                        wishMe()
+                        wishMe()            #to greet
 
-                if 'goodbye' in query or 'bye' in query:
-                    # speak('goodbye sir, Love you 3000....',love_png)
+                if 'goodbye' in query or 'bye' in query:         
                     speak('goodbye sir, Love you 3000....', 6)
-                    close()
+                    close()     #for closing the frame
                     return
         except Exception as e:
             print("error to start...", e)
@@ -66,5 +65,5 @@ def main():
         speak(msg, 2)
 
 
-my_window(main)
+my_window(main)     #starting main loop
 
