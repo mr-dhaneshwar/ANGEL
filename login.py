@@ -45,7 +45,7 @@ def drop_table():
     crclose()
 
 def singup(use,pas,name,dob):
-    connect()
+    createTable()
     try:
         query = '''select * from ANGEL where username=%s'''
         info = use
@@ -67,7 +67,7 @@ def singup(use,pas,name,dob):
 
 
 def singin(use,pas):
-    connect()
+    createTable()
     try:
         query = '''select * from ANGEL where username=%s or password = %s'''
         info = (use,pas)
@@ -91,7 +91,7 @@ def singin(use,pas):
 
 
 def forgot(use,dob,new=''):
-    connect()
+    createTable()
     try:
         query = '''select * from ANGEL where username=%s or dob=%s'''
         info = (use,dob)
