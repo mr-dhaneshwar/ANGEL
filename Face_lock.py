@@ -134,22 +134,22 @@ def face_match(name='Dhaneshwar'):  # This function for Recognising the face
                 accuracy = "  {0}%".format(round(accuracy))
                 cam.release()
                 cv2.destroyAllWindows()
+                print("Thanks for using this program, have a good day.")
                 return True
             else:
                 accuracy = "  {0}%".format(round(100 - accuracy))
 
             cv2.putText(img, str(accuracy), (x + 5, y + h - 5), font, 1, (255, 255, 0), 1)
-
+            cv2.putText(img, "Press 'Esc' for Retrain Face Lock", (10, 30), cv2.FONT_HERSHEY_SIMPLEX, 0.9, (0, 255, 0), 2)
         cv2.imshow('camera', img)
 
         k = cv2.waitKey(10) & 0xff  # Press 'ESC' for exiting video
-        if k == 27 and (accuracy < 50):
-            break
+        if k == 27 :
+            # Do a bit of cleanup
+            cam.release()
+            cv2.destroyAllWindows()
+            return False
 
-    # Do a bit of cleanup
-    print("Thanks for using this program, have a good day.")
-    cam.release()
-    cv2.destroyAllWindows()
 
 def reset_face():
     
@@ -166,4 +166,6 @@ def reset_face():
         if os.path.isfile(file_path):
             os.remove(file_path)
             print(f"Deleted file: {file_path}")
-    
+
+
+
