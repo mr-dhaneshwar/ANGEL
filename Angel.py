@@ -29,7 +29,7 @@ def wishMe():   #for greet
         speak('Good Evening sir!')
     speak(current_time())
 
-    speak('I am Angel, Please tell me how may i help you')
+    speak('Hello, my name is Angel. How may I assist you today?')
     task()
 
 
@@ -65,4 +65,4 @@ def main():
         speak(msg, 2)
 
 my_window(main)     #starting main loop
-
+sys.exit()

@@ -7,17 +7,6 @@ from mail import*
 import random
 
 
-def error(query):
-    '''
-    function that checks if the query is blank or not and returns either True or False.
-
-    '''
-    if query == '':  # checks if the query is blank or not
-        speak('I did not understand, please Say That again.... ', 2)
-        return True
-    return False
-
-
 def task():
     import pywhatkit as kit
     '''
@@ -125,7 +114,7 @@ def task():
             speak('Shutting down')
             p.hotkey('Enter')
 
-        elif query_word[0] == 'angel':
+        elif query_word[0] == 'angel' or 'angel' in query:
             query = query.replace('angel ', '') + '.'
             speak(angel(query), 4)
 

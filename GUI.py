@@ -370,11 +370,6 @@ def my_window(main):
     logo = PhotoImage(file="image\\logo.png")
     root.iconphoto(False, logo)
 
-    if os.listdir('samples'):
-        if face_match():
-            print('welcome')
-        else:
-            signin_frame(4)
             
     logbgopen = Image.open('image\\login bg.png') #login page background
     # resize image
@@ -385,6 +380,8 @@ def my_window(main):
     # resize image
     resized = facebgopen.resize((200, 200), Image.LANCZOS)
     facegbgimg = ImageTk.PhotoImage(resized)
+
+    
 
     photo = PhotoImage(file=location + "background.png")
     bglb = Label(root, image=photo)
@@ -409,15 +406,12 @@ def my_window(main):
     start_button.place(x=800, y=372)
 
     # implementing face lock system
-    
-    # if not os.listdir('samples'):
-    #     print('no face samples')
-    #     face_sample()   #take face samples
-    #     face_train()    #train face model
-    # else:
-    #     if face_match():    #recognize face
-    #         print('welcome sir...')
 
-    if not os.listdir('samples'):
+    if os.listdir('samples'):
+        if face_match():
+            print('welcome')
+        else:
+            signin_frame(4)
+    else:
         signin_frame(2)
     root.mainloop()

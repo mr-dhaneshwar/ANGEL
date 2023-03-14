@@ -1,5 +1,6 @@
 from googletrans import Translator
 
+
 tr = Translator()
 
 

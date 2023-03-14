@@ -3,9 +3,10 @@ import pyttsx3
 import datetime
 from GUI import *
 from threading import *
+from translator import*
 
 # Define All reply
-thanks = ['i am fine sir', 'always stands for you sir', 'i am good , thanks for asking sir', 'fine sir', 'i am good']
+thanks = ['i am fine sir', 'always there for you sir', 'i am good , thanks for asking sir', 'fine sir', 'i am good']
 bye = ['goodbye angel', 'bye angel', 'bye', 'okay bye', 'okay bye angel', 'goodbye', 'chup ho jao', 'quit',
        'quit Angel', 'wait', 'okay wait']
 start = ['angel', 'wake up angel', 'hey angel', 'hello angel']
@@ -15,6 +16,15 @@ engine = pyttsx3.init('sapi5')  # Initializes the pyttsx3 module. The SAPI5 help
 voices = engine.getProperty('voices')  # Gets the list of voices available.
 engine.setProperty('voice', voices[1].id)  # Sets the voice to the second option in the list.
 
+def error(query):
+    '''
+    function that checks if the query is blank or not and returns either True or False.
+
+    '''
+    if query == '':  # checks if the query is blank or not
+        speak('I did not understand, please Say That again.... ', 2)
+        return True
+    return False
 
 def current_time():
     '''
@@ -35,12 +45,14 @@ def speak(audio, img=1):
     '''
     global speak_status, theme
     try:
+        audio = to_hi(audio)
         change_leble('', img)
         t = Thread(target=write, args=('Angel: ' + audio,))
         t.start()
 
         print('Angel: ' + audio)
         if speak_check():
+            engine.setProperty('rate', 195)
             engine.say(audio)
             engine.runAndWait()
 
@@ -59,19 +71,20 @@ def takeCommand():
         with sr.Microphone() as source:
             print('Listning....')
             change_leble('Listning....', 1)
+            r.adjust_for_ambient_noise(source)
             r.phrase_threshold = 1
             r.energy_threshold = 600
             audio = r.listen(source)
         try:
             print('Recognizing....')
             change_leble('Recognizing....', 5)
-            query = r.recognize_google(audio, language='en-in')
+            query = r.recognize_google(audio, language='hi')
             write(f'you: {query}')
             print(f'you: {query}')
 
         except Exception as e:
             query = ''
             return query
-        return query
+        return to_en(query)
     except Exception as e:
         print('listen problem......', e)

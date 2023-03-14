@@ -5,12 +5,13 @@ def connect():
     global cursor, con
     try:
         con = pymysql.connect(host='localhost',user='root',password='',database='test')
+        print('connected to server')
+        cursor = con.cursor()
     except pymysql.Error as e:
         print(e,'not connnected to server')
-        sys.exit(0)
-    print('connected to server')
+    
 
-    cursor = con.cursor()
+    
 
 def crclose():
     cursor.close()
