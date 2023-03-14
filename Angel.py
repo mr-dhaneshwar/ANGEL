@@ -1,84 +1,68 @@
 '''A.N.G.E.L : Automated Network Generating Expert Logic'''
 
-from operation import*
-from threading import*
+from operation import *
+from threading import *
+import pyautogui as p
 import socket
 import random
 
-def internet_connection_status():
+
+def internet_connection_status():       #check the internet connection
     try:
         socket.create_connection(("www.google.com", 80))
-        return True          #"You are connected to the internet"
+        return True  # "You are connected to the internet"
     except OSError:
-        return False         #"You are not connected to the internet"
+        return False  # "You are not connected to the internet"
 
-def wishMe():
+
+def wishMe():   #for greet
     '''
     function that says a greeting according to the current time.
 
     '''
-    hour = int(datetime.datetime.now().hour)    #getting hours
-    if hour>=0 and hour<12:     #check current time is AM or PM
+    hour = int(datetime.datetime.now().hour)  # getting hours
+    if 0 <= hour < 12:  # check current time is AM or PM
         speak('Good Morning sir!')
-    elif hour>=12 and hour<18:
+    elif 12 <= hour < 18:
         speak('Good Afternoon sir!')
     else:
         speak('Good Evening sir!')
-    speak(current_time())       
+    speak(current_time())
 
-    speak('I am Angel, Please tell me how may i help you')
+    speak('Hello, my name is Angel. How may I assist you today?')
     task()
 
 
 def main():
-    '''
+    """
     main function and a loop that listens for the command "angel" and executes the task() function if it is said.
     The program exits if the command "goodbye angel" is said.
-    
-    ''' 
-    if internet_connection_status(): 
-        
+
+    """
+    if internet_connection_status():
+
         try:
-            while True:
-                query = takeCommand().lower()
-                if query in start:
+            while True:     #for continue listening untill thye find wakeup key word 
+                query = takeCommand().lower()       
+                
+                if query in start:  #
                     p.hotkey('up')
-                    if query == 'angel':
+                    if query == 'angel':    #if wake word is Angel then continue directly
                         speak(random.choice(angel_output))
-                        task()
+                        task()              #to perform various operation (tasks)
                     else:
-                        wishMe()
-        
-                if 'goodbye' in query or 'bye' in query:
-                    
-                    # speak('goodbye sir, Love you 3000....',love_png)
-                    # f.destroy()
-                    speak('goodbye sir, Love you 3000....')
+                        wishMe()            #to greet
+
+                if 'goodbye' in query or 'bye' in query:         
+                    speak('goodbye sir, Love you 3000....', 6)
+                    close()     #for closing the frame
                     return
         except Exception as e:
-            print(e)
-            
+            print("error to start...", e)
+
     else:
         msg = 'You are not connected to the internet'
-        speak(msg) 
+        speak(msg, 2)
 
-main()
-
-
-
-
-
-# def Exicute():
-#     t = Thread(target=main)
-#     t.start()
-#     new_frame()
-
-
-
-
-# t = Thread(target=my_window)
-# t.start()
-
-# start_button = Button(root, command=Exicute, text='Start', font=('Arial',12), relief=GROOVE,fg='Blue', borderwidth=10, height=2, width=5)
-# start_button.place(x=800,y=372)
-# my_window()
+my_window(main)     #starting main loop
+sys.exit()

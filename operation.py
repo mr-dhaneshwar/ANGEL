@@ -1,9 +1,11 @@
 from requests import get
 import pyautogui as p
-from speech import*
+from openapi import *
+from speech import *
 import webbrowser
+from mail import*
 import random
-from openapi import*
+
 
 def task():
     import pywhatkit as kit
@@ -18,7 +20,7 @@ def task():
         if error(query):
             continue
 
-        #Logic for executing tasks on query
+        # Logic for executing tasks on query
         if query in bye:
             if 'wait' in query:
                 speak('ok sir i am waiting...')
@@ -32,7 +34,7 @@ def task():
             speak('What i can do for you')
 
         elif 'open google' in query:
-            
+
             webbrowser.open('google.com')
             speak('opening google')
 
@@ -43,48 +45,35 @@ def task():
         elif 'open stack overflow' in query:
             webbrowser.open('stackoverflow.com')
             speak('opening stack overflow')
-        
+
         elif 'open' in query:
-            query = query.replace('open','').strip()
+            query = query.replace('open', '').strip()
             p.hotkey('Win')
             for i in query:
                 p.hotkey(i)
             p.hotkey('enter')
-            speak('opening,'+query)
-        
+            speak('opening,' + query)
+
         elif 'switch' in query:
             speak('ok sir')
-            p.hotkey('Alt','Tab')
+            p.hotkey('Alt', 'Tab')
 
         elif 'close' in query:
             speak('ok sir')
-            p.hotkey('Alt','F4')
+            p.hotkey('Alt', 'F4')
 
         elif 'screenshot' in query and 'show' in query:
-            p.hotkey('win','g')
+            p.hotkey('win', 'g')
             speak('here is your screenshots')
 
         elif 'screenshot' in query:
             speak('ok sir')
-            p.hotkey('Win','Alt','writeScreen')
+            p.hotkey('Win', 'Alt', 'writeScreen')
             speak('screenshot seved')
 
-        elif 'sleep' in query:
-            speak('ok sir')
-            p.hotkey('Win','d')
-            p.hotkey('Alt','F4')
-            p.hotkey('up')
-            p.hotkey('Enter')
-            return
-
-        elif 'shutdown' in query or 'off' in query:
-            p.hotkey('win','d')
-            p.hotkey('Alt','F4')
-            speak('Shutting down')
-            p.hotkey('Enter')
 
         elif 'time' in query:
-            speak(current_time()+' sir')
+            speak(current_time() + ' sir')
 
         elif 'play music' in query:
             speak('which song ?')
@@ -92,15 +81,48 @@ def task():
             speak('playing on youtube')
             kit.playonyt(song)
             break
-        
-        elif query_word[0] == 'angel':
-            query = query.replace('angel ','')+'.'
-            # speak(angel(query), idea_png)
-            speak(angel(query))
+
+        elif 'email' in query or 'mail'  in query:
+            try:
+                to_list = (query.split('to'))
+                to = to_list[1].strip()
+
+                if check_mail(to):
+                    to = check_mail(to)
+                    speak('what is the message')
+                    msg = takeCommand().lower()
+                    sendEmail(to[1], msg)       #1st index gives email
+                    speak(f'message has been send to {to[0]}', 1)   #0 index gives name
+                else:
+                    speak('email address not found',2)
+
+            except Exception as e:
+                print('problem while sending email',e)
+                speak('email not send try again...',2)
+
+        elif 'sleep' in query:
+            speak('ok sir')
+            p.hotkey('Win', 'd')
+            p.hotkey('Alt', 'F4')
+            p.hotkey('up')
+            p.hotkey('Enter')
+            return
+
+        elif 'shutdown' in query :
+            p.hotkey('win', 'd')
+            p.hotkey('Alt', 'F4')
+            speak('Shutting down')
+            p.hotkey('Enter')
+
+        elif query_word[0] == 'angel' or 'angel' in query:
+            query = query.replace('angel ', '') + '.'
+            speak(angel(query), 4)
 
         elif 'ip address' in query:
             ip = get('https://api.ipify.org').text
             speak(f'your IP Address is {ip}')
 
+
+            
         else:
             speak('sorry.. this is not in my system')
